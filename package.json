@@ -1,0 +1,15 @@
+{
+  "name": "ship-api",
+  "version": "1.0.0",
+  "description": "Dinamik ship API with avatars and love score",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "canvas": "^2.11.2"
+  },
+  "engines": {
+    "node": "18.x"
+  }
+}
