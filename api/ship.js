@@ -1,5 +1,4 @@
-import { createCanvas, loadImage, registerFont } from 'canvas';
-import path from 'path';
+import { createCanvas, loadImage } from '@napi-rs/canvas';
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -17,7 +16,7 @@ export default async function handler(req, res) {
   const canvas = createCanvas(width, height);
   const ctx = canvas.getContext('2d');
 
-  // Arka plan (gradient)
+  // Arka plan gradient
   const gradient = ctx.createLinearGradient(0, 0, width, height);
   gradient.addColorStop(0, '#ffdde1');
   gradient.addColorStop(1, '#ee9ca7');
@@ -34,7 +33,7 @@ export default async function handler(req, res) {
     console.error('Avatar yüklenemedi:', err);
   }
 
-  // Kalp ortada (gölge ile)
+  // Ortada gölgeli kalp
   const heartX = width / 2;
   const heartY = height / 2;
   ctx.save();
@@ -63,7 +62,7 @@ export default async function handler(req, res) {
   ctx.fillText(user1, 70, 200);
   ctx.fillText(user2, 530, 200);
 
-  // PNG gönder
+  // PNG olarak gönder
   res.setHeader('Content-Type', 'image/png');
-  res.status(200).send(canvas.toBuffer());
+  res.status(200).send(await canvas.encode('png'));
 }
